@@ -18,7 +18,7 @@ All project documents are in the [Project Wiki](../../wiki/Home).
 - [Requirements](../../wiki/Requirements)<br>
 - [Development Plan](../../wiki/Development%20Plan)<br>
 - [Iteration 1 Plan](../../wiki/Iteration%201%20Plan)
-and [Task Board](https://github.com/users/jaybjackie/projects/4)
+and [Task Board](https://github.com/users/jaybjackie/projects/4/views/2)
 ***
 ### Useful Link
 [django-tutorial](https://docs.djangoproject.com/en/4.1/intro/tutorial01/)
