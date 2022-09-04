@@ -1,5 +1,7 @@
-# ku polls 
- Online Polls and Survey Web Application.<br>
+# Online Polls and Surveys Web Application 
+
+Allow KU communities to create and participant in any polls and surveys on **KU Polls**. <br>
+
 The app was built using [Django](https://www.djangoproject.com/). <br>
 App created as part of the [Individual Software Process](
 https://cpske.github.io/ISP) course at Kasetsart University.
