@@ -8,7 +8,10 @@ https://cpske.github.io/ISP) course at Kasetsart University.
 
 # Install and Run
 
-to be added.
+- Django 4.1.1 version (lastest) <br>
+
+You can install by commands <br>
+`pip install -r requirements.txt`
 
 ## Project Documents
 
