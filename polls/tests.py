@@ -2,7 +2,6 @@ import datetime
 from django.urls import reverse
 from django.test import TestCase
 from django.utils import timezone
-from pydantic import ValidationError
 
 from .models import Question
 
@@ -55,12 +54,6 @@ class QuestionModelTests(TestCase):
         time = timezone.now()
         exact_pub = Question(pub_date=time)
         self.assertIs(exact_pub.can_vote(), True)
-
-    # def test_exact_end_time(self):
-    #     pub_time = timezone.now() - datetime.timedelta(hours=10)
-    #     time = timezone.now()
-    #     exact_end = Question(pub_date=pub_time, end_date=time)
-    #     self.assertIs(exact_end.can_vote(), True)
 
     def test_late_vote(self):
         pub_time = timezone.now() - datetime.timedelta(hours=2)

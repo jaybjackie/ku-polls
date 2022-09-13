@@ -48,9 +48,6 @@ class ResultsView(generic.DetailView):
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-
-    if not question.can_vote():
-        return HttpResponseRedirect(reverse('polls:index'))
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
@@ -66,3 +63,10 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+def go_index(request, question_id):
+    """Return to index page when question is unavailable."""
+    question = get_object_or_404(Question, pk=question_id)
+    if not question.can_vote():
+        messages.error(request, "Quesiont is unavailable.")
+        return HttpResponseRedirect(reverse('polls:index'))
