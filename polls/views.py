@@ -1,4 +1,3 @@
-from email import message
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
@@ -48,9 +47,9 @@ class ResultsView(generic.DetailView):
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-
     if not question.can_vote():
-        return HttpResponseRedirect(reverse('polls:index'))
+        messages.error(request, "Quesiont is unavailable.")
+        return HttpResponseRedirect(reverse('polls:index'), None)
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
