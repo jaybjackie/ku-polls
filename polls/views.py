@@ -1,11 +1,14 @@
 from django.utils import timezone
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render,redirect
 from django.urls import reverse
 from django.views import generic
 from django.contrib import messages
 from .models import Choice, Question
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
@@ -21,6 +24,7 @@ class IndexView(generic.ListView):
         ).order_by('-pub_date')[:5]
 
 class DetailView(generic.DetailView):
+    """Class based view for viewing a poll."""
     model = Question
     template_name = 'polls/detail.html'
  
@@ -44,8 +48,12 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
-
+@login_required
 def vote(request, question_id):
+    """Vote for a choice on a question (poll)."""
+    user = request.user
+    if not user.is_authenticated:
+        return redirect('login')
     question = get_object_or_404(Question, pk=question_id)
     if not question.can_vote():
         messages.error(request, "Quesiont is unavailable.")
@@ -65,3 +73,20 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+def signup(request):
+    """Register a new user."""
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_passwd = form.cleaned_data.get('passwd')
+            user = authenticate(username=username, password=raw_passwd)
+            login(request, user)
+            return redirect('polls')
+        else:
+            return render(request, "")
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/signup.html', {'form':form})
