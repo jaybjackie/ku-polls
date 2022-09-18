@@ -73,7 +73,7 @@ def vote(request, question_id):
         })
     else:
         #Fix here collect the choice and save                                                               
-        selected_choice.vote += 1
+        # selected_choice.vote += 1
         selected_choice.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
