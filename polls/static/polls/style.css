@@ -1,6 +1,18 @@
+header {
+    color: red;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 li a {
     color: black;
 }
 body {
     background: rgb(255, 255, 255) ;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 5%;
 }
