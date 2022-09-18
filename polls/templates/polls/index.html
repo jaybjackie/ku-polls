@@ -2,6 +2,9 @@
 
 <link rel="stylesheet" href="{% static 'polls/style.css' %}">
 
+<header>
+    <img src= "static/polls/images/logo-ku-polls.png" alt="logo" class="center">
+</header>
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}

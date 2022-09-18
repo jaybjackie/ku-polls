@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, render,redirect
 from django.urls import reverse
 from django.views import generic
 from django.contrib import messages
-from .models import Choice, Question
+from .models import Choice, Question, Vote
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate
@@ -54,13 +54,15 @@ def vote(request, question_id):
     user = request.user
     question = get_object_or_404(Question, pk=question_id)
 
-    if not user.is_authenticated:
+    if not user.is_authenticated: # if not authenticated return to login page
         return redirect('login')
 
     if not question.can_vote():
         messages.error(request, "Quesiont is unavailable.")
         return HttpResponseRedirect(reverse('polls:index'))
-        
+    # if Vote.objects.filter(choice__question=question, user=user):
+    #     messages.error(request, "Already vote")
+    #     return HttpResponseRedirect(reverse('polls:index'))
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
@@ -69,8 +71,9 @@ def vote(request, question_id):
             'question': question,
             'error_message': "You didn't select a choice.",
         })
-    else:                                                                      
-        selected_choice.votes += 1
+    else:
+        #Fix here collect the choice and save                                                               
+        # selected_choice.vote += 1
         selected_choice.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a

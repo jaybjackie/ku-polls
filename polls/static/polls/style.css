@@ -4,3 +4,9 @@ li a {
 body {
     background: rgb(255, 255, 255) ;
 }
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10%;
+}
