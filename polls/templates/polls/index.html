@@ -1,9 +1,20 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+<link href='https://fonts.googleapis.com/css?family=IBM Plex Mono' rel='stylesheet'>
 
 <header>
-    <img src= "static/polls/images/logo-ku-polls.png" alt="logo" class="center">
+    <div class="navbar">
+        <div id= "nav-container">
+            <img src= "static/polls/images/logo-ku-polls-latest.png" alt="logo" class="center" >
+            <ul>
+                <li><a href="" style="text-decoration: none;">Question</a></li>
+                <li><a href="signup/">signup</a></li>
+                <li><a href="accounts/login" style="text-decoration: none;">login</a></li>
+                <li><img src="static/polls/images/dark-light.png" alt="mode" width="60" class=""></li>
+            </ul>
+        </div>
+    </div>
 </header>
 {% if latest_question_list %}
     <ul>

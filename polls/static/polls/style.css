@@ -1,12 +1,25 @@
+
+.navbar ul {
+  margin: 0px;
+  display:inline;
+  float: right;
+}
+
+.navbar li{
+  display:inline-block;
+  }
+
 li a {
     color: black;
 }
 body {
-    background: rgb(255, 255, 255) ;
+  font-family: 'IBM Plex Mono';
+font-size: medium;
+  background: rgb(255, 255, 255) ;
 }
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 10%;
+  width: 120;
 }
