@@ -43,7 +43,7 @@ class Choice(models.Model):
     # votes = models.IntegerField(default=0)
     
     @property
-    def vote(self):
+    def votes(self):
         """Count the vote that refer to this choice."""
         count = Vote.objects.filter(choice=self).count()
         return count
@@ -54,6 +54,6 @@ class Choice(models.Model):
 class Vote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
-
+    
     def __str__(self) -> str:
         return f"{self.user} - {self.choice}"

@@ -47,7 +47,6 @@ class DetailView(generic.DetailView):
         if not question.can_vote():
             messages.error(request, "This Question cannot vote.")
             return redirect('polls:index')
-        
         return render(request, 'polls/detail.html', {'question': question})
     
             
@@ -72,9 +71,13 @@ def vote(request, question_id):
             'error_message': "You didn't select a choice.",
         })
     else:
-        #Fix here collect the choice and save                                                               
-        # selected_choice.vote += 1
-        selected_choice.save()
+        has_voted = Vote.objects.filter(choice__question=question, user=user)
+        if has_voted:
+            old_vote = has_voted[0]
+            if old_vote != selected_choice: # vote on new choice
+                old_vote.delete() 
+        new_vote = Vote(user=user, choice=selected_choice)
+        new_vote.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
