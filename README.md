@@ -20,6 +20,17 @@ All project documents are in the [Project Wiki](../../wiki/Home).
 - [Vision Statement](../../wiki/Vision%20Statement)<br>
 - [Requirements](../../wiki/Requirements)<br>
 - [Development Plan](../../wiki/Development%20Plan)<br>
+
+## DEMO run
+You can uses these demo users below to visits the site.
+
+| Username  | Password  |
+|-----------|-----------|
+|   jay   | Thisis1stuser |
+|   jerome   | Thisis2nduser |
+
+
 ***
 ### Useful Link
-[django-tutorial](https://docs.djangoproject.com/en/4.1/intro/tutorial01/)
+[django-tutorial](https://docs.djangoproject.com/en/4.1/intro/tutorial01/) <br>
+[Django Girl Tutorial](https://tutorial.djangogirls.org/en/) Tutorial with really good explanation.
