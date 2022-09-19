@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render,redirect
@@ -36,13 +37,19 @@ class DetailView(generic.DetailView):
         return Question.objects.filter(pub_date__lte=timezone.now())
         
 
-    def get_question(self, request, question_id):
+    def get(self, request, **kwargs):
         """If question doesn't exist or closed, redirect to index page."""
-        question = get_object_or_404(Question, pk=question_id)
-        if not question.can_vote() :
-            messages.error(request, "Quesiont is unavailable.")
-            return HttpResponseRedirect(reverse('polls:index'))
-
+        try:
+            question = get_object_or_404(Question, pk=kwargs['pk'])
+        except Http404:
+            messages.error(request, "This Question doesn't exist.")
+            return redirect('polls:index')
+        if not question.can_vote():
+            messages.error(request, "This Question cannot vote.")
+            return redirect('polls:index')
+        
+        return render(request, 'polls/detail.html', {'question': question})
+    
             
 class ResultsView(generic.DetailView):
     model = Question
@@ -56,13 +63,6 @@ def vote(request, question_id):
 
     if not user.is_authenticated: # if not authenticated return to login page
         return redirect('login')
-
-    if not question.can_vote():
-        messages.error(request, "Quesiont is unavailable.")
-        return HttpResponseRedirect(reverse('polls:index'))
-    # if Vote.objects.filter(choice__question=question, user=user):
-    #     messages.error(request, "Already vote")
-    #     return HttpResponseRedirect(reverse('polls:index'))
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
