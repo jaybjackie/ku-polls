@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 
 class UserAuthenticationTest(TestCase):
-
+    """Test about authenticated user."""
     def setUp(self) -> None:
         self.auth = {
             'username': 'Jason',
