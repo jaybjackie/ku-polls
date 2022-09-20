@@ -1,10 +1,12 @@
+from http.client import HTTPResponse
 from django.http import Http404
 from django.utils import timezone
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render,redirect
 from django.urls import reverse
 from django.views import generic
 from django.contrib import messages
+from matplotlib.style import context
 from .models import Choice, Question, Vote
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -45,14 +47,16 @@ class DetailView(generic.DetailView):
             messages.error(request, "This Question doesn't exist.")
             return redirect('polls:index')
         if not question.can_vote():
-            messages.error(request, "This Question cannot vote.")
-            return redirect('polls:index')
+            response = redirect('polls:index')
+            response.status_code = 404
+            return response
         return render(request, 'polls/detail.html', {'question': question})
     
             
 class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
+
 
 @login_required
 def vote(request, question_id):
@@ -72,7 +76,7 @@ def vote(request, question_id):
         })
     else:
         has_voted = Vote.objects.filter(choice__question=question, user=user)
-        if has_voted:
+        if has_voted: # already vote
             old_vote = has_voted[0]
             if old_vote != selected_choice: # vote on new choice
                 old_vote.delete() 
