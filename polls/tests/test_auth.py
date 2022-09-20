@@ -13,7 +13,8 @@ class UserAuthenticationTest(TestCase):
         }
         User.objects.create_user(**self.auth)
 
-    def test_login(self):
+    def test_login_exist(self):
+        """Access to login page"""
         response = self.client.get(reverse('login'))
         # check status code
         self.assertEqual(200, response.status_code)
