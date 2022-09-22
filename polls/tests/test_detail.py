@@ -14,6 +14,12 @@ def create_question(question_text, days):
     return Question.objects.create(question_text=question_text, pub_date=time)
 
 class QuestionDetailViewTests(TestCase):
+
+    def test_access_detail(self):
+        response = self.client.get('/polls/')
+        self.assertEqual(response.status_code, 200)
+
+        
     def test_future_question(self):
         """
         The detail view of a question with a pub_date in the future
