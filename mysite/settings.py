@@ -9,9 +9,10 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+from email.policy import default
 import os.path
 from pathlib import Path
-from decouple import config
+from decouple import config, Csv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config("SECRET_KEY", cast=str, default="missing-secret-key")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = config("DEBUG", cast=bool, default=False)
+# add localhost using config
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv(), default="localhost")
 
 
 # Application definition
@@ -116,11 +117,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
+# uncomment here to be able to use statics while debug is false or config
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'polls/static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_REDIRECT_URL = '/polls/'    # show list of polls
+LOGIN_REDIRECT_URL = '/'    # show list of polls
 LOGOUT_REDIRECT_URL = '/'         # after logout, go where?
