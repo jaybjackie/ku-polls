@@ -75,12 +75,6 @@ https://cpske.github.io/ISP) course at Kasetsart University.
 
         python manage.py runserver
 
-    
-- Django 4.1.1 version (latest) <br>
-
-You can install by commands <br>
-`pip install -r requirements.txt`
-
 ## Project Documents
 
 All project documents are in the [Project Wiki](../../wiki/Home).
