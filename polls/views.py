@@ -1,5 +1,3 @@
-from http.client import HTTPResponse
-from django.http import Http404
 from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render,redirect
