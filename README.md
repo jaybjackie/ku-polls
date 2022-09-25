@@ -112,8 +112,10 @@ place `Your-Secret-Key` in `.env` file.
     ````
     python .\manage.py runserver
     ````
-    
-    
+ 
+ Go to the app:
+[http://localhost:8000/](http://localhost:8000/)
+
 ## Project Documents
 
 All project documents are in the [Project Wiki](../../wiki/Home).
