@@ -1,0 +1,92 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$wb8h2ilk5O6RU7NS7BdeFA$ExWV4X+qOZdfXp+760LU4xRsthfOmUR7BVNtcaptuSo=",
+    "last_login": "2022-09-19T09:37:13.401Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "benzlengg@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2022-09-04T09:48:27.111Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$fazorxUKvR7dqb7lDi0f68$1LvF/oQ2z3uFvktnS1LRkA5UkT4vGaiGIVT9d9a/qsM=",
+    "last_login": "2022-09-16T15:39:57.315Z",
+    "is_superuser": false,
+    "username": "harry",
+    "first_name": "Harry",
+    "last_name": "",
+    "email": "harry@hogwart.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-09-16T15:38:17.396Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$Xj5LWhl0xnJ9Qj8baRjnpO$+9Ju0IVn0yHxLL+BNzMhFaAe9NC8DwxWPjxSzjG+FnA=",
+    "last_login": "2022-09-25T12:43:33.012Z",
+    "is_superuser": false,
+    "username": "jay",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-09-18T10:02:19.436Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$1YxUdhI7xoCPq9NUcyl5Mw$c5Ikvl3Mgqohy90QNtujCkjB66IKXJwugpnTzCqEtHs=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "jerome",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-09-19T09:37:13.272Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$axvXsGj3ODkWgh6ydeBsEF$wxAzpIWnL/3WyU11AhJmY4lccaWRREQxgSDWUWJVn+Y=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "username",
+    "first_name": "Mint",
+    "last_name": "Slayer",
+    "email": "mintsan@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-09-19T16:13:40.528Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
