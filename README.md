@@ -26,39 +26,22 @@ git clone https://github.com/jaybjackie/ku-polls.git
 
 3. Create a virtual environment. <br>
 
-    you can name virtual environment with any. <br>
-    but the 2 common names are `venv` or `env`
-
-    for `venv`
     ````
     python -m venv venv
     ````
-    and for `env`<br>
-    
-       python -m venv env
 
 4. Activate the virtual environment.<br>
 
     - for `MacOS/Linux`<br>
-    ````
-    source venv/bin/activate
-    ````
-    or<br>
     ````    
     . venv/bin/activate
     ````
 
     - for `WindowOS`<br>
-
-        for virtual environment named `venv`
-        ````
-        .\venv\Scripts\activate
-        ````
         
-        for virtual environment named `env`
-        ````
-        .\env\Scripts\activate
-        ````
+    ````
+    .\venv\Scripts\activate
+    ````
         
     In case `cannot be loaded because running scripts is disabled on this system`
         
@@ -84,24 +67,16 @@ pip install -r requirements.txt
 # Create a secret key using ...
 # python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
 
-SECRET_KEY = YOUR-SECRET_KEY
+SECRET_KEY = YOUR-SECRET-KEY
 DEBUG = False
 ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
 ````    
-
-   to generates your `SECRET_KEY`, type following command in the terminal.
-
-   ````
-   python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
-   ````
-   
-place `Your-Secret-Key` in `.env` file.
 
 7. Migrate the database.
 
     for `MacOS/Linux`
     ````
-    python manange.py migrate
+    python manage.py migrate
     ````
     
     for `WindowOS`
@@ -113,12 +88,12 @@ place `Your-Secret-Key` in `.env` file.
 
     for `MacOS/Linux`
     ````
-    python manange.py loaddata data/users.json polls.json
+    python manage.py loaddata data/users.json polls.json
     ````
     
     for `WindowOS`
     ````
-    python .\manage.py loaddata data\users.json polls.json
+    python .\manage.py loaddata .\data\users.json .\polls.json
     ````
 
 9. Run the server.
@@ -132,8 +107,10 @@ place `Your-Secret-Key` in `.env` file.
     ````
     python .\manage.py runserver
     ````
-    
-    
+ 
+ Go to the app:
+[http://localhost:8000/](http://localhost:8000/)
+
 ## Project Documents
 
 All project documents are in the [Project Wiki](../../wiki/Home).
