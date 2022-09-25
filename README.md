@@ -64,24 +64,19 @@ pip install -r requirements.txt
 6. Create `.env` file in `mysite/` and modify by the following lines:
 
 ````
-DEBUG=True
-SECRET_KEY=Your-Secret-Key
-ALLOWED_HOSTS=localhost,127.0.0.1
+# Create a secret key using ...
+# python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
+
+SECRET_KEY = YOUR-SECRET-KEY
+DEBUG = False
+ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
 ````    
-
-   to generates your `SECRET_KEY`, type following command in the terminal.
-
-   ````
-   python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
-   ````
-   
-place `Your-Secret-Key` in `.env` file.
 
 7. Migrate the database.
 
     for `MacOS/Linux`
     ````
-    python manange.py migrate
+    python manage.py migrate
     ````
     
     for `WindowOS`
@@ -93,7 +88,7 @@ place `Your-Secret-Key` in `.env` file.
 
     for `MacOS/Linux`
     ````
-    python manange.py loaddata data/users.json polls.json
+    python manage.py loaddata data/users.json polls.json
     ````
     
     for `WindowOS`
