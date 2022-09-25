@@ -110,12 +110,12 @@ place `Your-Secret-Key` in `.env` file.
 
     for `MacOS/Linux`
     ````
-    python manange.py loaddata users polls
+    python manange.py loaddata data/users.json polls.json
     ````
     
     for `WindowOS`
     ````
-    python .\manage.py loaddata users polls
+    python .\manage.py loaddata data\users.json polls.json
     ````
 
 9. Run the server.
