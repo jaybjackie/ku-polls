@@ -4,6 +4,7 @@ from django.test import TestCase
 from django.utils import timezone
 from polls.models import Question
 
+
 class QuestionModelTests(TestCase):
 
     def test_was_published_recently_with_old_question(self):
@@ -20,10 +21,12 @@ class QuestionModelTests(TestCase):
         was_published_recently() returns True for questions whose pub_date
         is within the last day.
         """
-        time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
+        time = timezone.now() - datetime.timedelta(hours=23,
+                                                   minutes=59,
+                                                   seconds=59)
         recent_question = Question(pub_date=time)
         self.assertIs(recent_question.was_published_recently(), True)
-    
+
     def test_question_no_end(self):
         pubed_time = timezone.now() - datetime.timedelta(hours=1)
         waiting_time = timezone.now() + datetime.timedelta(hours=1)
@@ -36,7 +39,7 @@ class QuestionModelTests(TestCase):
         before_end = timezone.now() + datetime.timedelta(hours=2)
         pub_time = timezone.now() - datetime.timedelta(hours=5)
         after_end = timezone.now() - datetime.timedelta(hours=2)
-        must_valid = Question(pub_date=pub_time, end_date= before_end)
+        must_valid = Question(pub_date=pub_time, end_date=before_end)
         must_invalid = Question(pub_date=pub_time, end_date=after_end)
         null_end = Question(pub_date=pub_time)
         self.assertIs(null_end.can_vote(), True)
@@ -47,7 +50,7 @@ class QuestionModelTests(TestCase):
         time = timezone.now() + datetime.timedelta(hours=10)
         future_question = Question(pub_date=time)
         self.assertIs(future_question.can_vote(), False)
-    
+
     def test_exact_pub_time(self):
         time = timezone.now()
         exact_pub = Question(pub_date=time)

@@ -1,14 +1,14 @@
 from django.utils import timezone
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render,redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
 from django.contrib import messages
 from .models import Choice, Question, Vote
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
@@ -23,37 +23,41 @@ class IndexView(generic.ListView):
             pub_date__lte=timezone.now()
         ).order_by('-pub_date')[:5]
 
+
 class DetailView(generic.DetailView):
     """Class based view for viewing a poll."""
     model = Question
     template_name = 'polls/detail.html'
     # check for end_date question, if end then return to index page
-    
+
     def get_queryset(self):
         """
         Excludes any questions that aren't published yet.
         """
         return Question.objects.filter(pub_date__lte=timezone.now())
-        
 
     def get(self, request, **kwargs):
         """
-         If question doesn't exist or closed, redirect to index page.
-         Stores previous vote of voted question.
-         """
-         # get question
+        If question doesn't exist or closed, redirect to index page.
+        Stores previous vote of voted question.
+        """
         question = get_object_or_404(Question, pk=kwargs['pk'])
-        try: # try get the previous vote
-            vote = Vote.objects.get(user=request.user, choice__in=question.choice_set.all())
+        try:    # try get the previous vote
+            vote = Vote.objects.get(user=request.user,
+                                    choice__in=question.choice_set.all())
             previous_vote = vote.choice
-        except Vote.DoesNotExist: # except vote not found then previous vote is empty
+        except Vote.DoesNotExist:
+            # except vote not found then previous vote is empty
             previous_vote = ''
-        if not question.can_vote(): # if have not validate to vote, return to index instead
+        if not question.can_vote():
+            # if have not validate to vote, return to index instead
             response = redirect('polls:index')
             response.status_code = 404
             return response
-        # can vote, go for vote and provide the previous_vote; either choice or empty
-        return render(request, 'polls/detail.html', {'question': question, 'previous_vote':previous_vote})
+        # can vote, go for vote and provide the previous_vote
+        # either choice or empty
+        return render(request, 'polls/detail.html', {'question': question,
+                                                     'previous_vote': previous_vote})
    
             
 class ResultsView(generic.DetailView):
