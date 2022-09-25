@@ -56,10 +56,10 @@ class DetailView(generic.DetailView):
             return response
         # can vote, go for vote and provide the previous_vote
         # either choice or empty
-        return render(request, 'polls/detail.html', {'question': question,
-                                                     'previous_vote': previous_vote})
-   
-            
+        return render(request, 'polls/detail.html',
+                      {'question': question, 'previous_vote': previous_vote})
+
+
 class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
@@ -71,7 +71,7 @@ def vote(request, question_id):
     user = request.user
     question = get_object_or_404(Question, pk=question_id)
 
-    if not user.is_authenticated: # if not authenticated return to login page
+    if not user.is_authenticated:   # if not authenticated return to login page
         return redirect('login')
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
@@ -83,16 +83,18 @@ def vote(request, question_id):
         })
     else:
         has_voted = Vote.objects.filter(choice__question=question, user=user)
-        if has_voted: # already vote
+        if has_voted:   # already vote
             old_vote = has_voted[0]
-            if old_vote != selected_choice: # vote on new choice
-                old_vote.delete() 
+            if old_vote != selected_choice:  # vote on new choice
+                old_vote.delete()
         new_vote = Vote(user=user, choice=selected_choice)
         new_vote.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+        return HttpResponseRedirect(reverse('polls:results',
+                                    args=(question.id,)))
+
 
 def signup(request):
     """Register a new user."""
@@ -108,7 +110,8 @@ def signup(request):
             return redirect('polls:index')
         else:
             # django handle the existing user.
-            messages.error(request, "Unsuccessful registration. Invalid information.")
+            messages.error(request,
+                           "Unsuccessful registration. Invalid information.")
     else:
         form = UserCreationForm()
-    return render(request, 'registration/signup.html', {'form':form})
+    return render(request, 'registration/signup.html', {'form': form})
