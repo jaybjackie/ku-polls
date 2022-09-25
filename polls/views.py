@@ -1,4 +1,3 @@
-from http.client import HTTPResponse
 from django.http import Http404
 from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponseNotFound
@@ -40,18 +39,24 @@ class DetailView(generic.DetailView):
         
 
     def get(self, request, **kwargs):
-        """If question doesn't exist or closed, redirect to index page."""
-        try:
-            question = get_object_or_404(Question, pk=kwargs['pk'])
-        except Http404:
-            messages.error(request, "This Question doesn't exist.")
-            return redirect('polls:index')
-        if not question.can_vote():
+        """
+         If question doesn't exist or closed, redirect to index page.
+         Stores previous vote of voted question.
+         """
+         # get question
+        question = get_object_or_404(Question, pk=kwargs['pk'])
+        try: # try get the previous vote
+            vote = Vote.objects.get(user=request.user, choice__in=question.choice_set.all())
+            previous_vote = vote.choice
+        except Vote.DoesNotExist: # except vote not found then previous vote is empty
+            previous_vote = ''
+        if not question.can_vote(): # if have not validate to vote, return to index instead
             response = redirect('polls:index')
             response.status_code = 404
             return response
-        return render(request, 'polls/detail.html', {'question': question})
-    
+        # can vote, go for vote and provide the previous_vote; either choice or empty
+        return render(request, 'polls/detail.html', {'question': question, 'previous_vote':previous_vote})
+   
             
 class ResultsView(generic.DetailView):
     model = Question
