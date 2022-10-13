@@ -1,7 +1,12 @@
 [run]
 # measure branch coverage
 branch = True
+# don't test the Python standard library
+cover_pylib = False
 # omit uninteresting files
 omit =
-    polls/__init__.py
-    polls/tests/test_*.py
+    polls/test.py
+    polls/migrations/*
+    */site-packages/*
+    */dist-packages/*
+    manage.py
