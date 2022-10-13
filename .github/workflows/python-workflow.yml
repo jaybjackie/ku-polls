@@ -36,8 +36,6 @@ jobs:
         python -m unittest
     - uses: actions/checkout@master
     - uses: codecov/codecov-action@v3
-    - name: Run tests and collect coverage
-      run: pytest --cov=./ --cov-report=xml
-    - name: Upload coverage reports to Codecov with GitHub Action
+    - name: Upload coverage report using Github Action
       uses: codecov/codecov-action@v3
         
