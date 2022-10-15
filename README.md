@@ -1,6 +1,7 @@
 # Online Polls and Surveys Web Application 
 
 ![Unit test](https://github.com/jaybjackie/ku-polls/actions/workflows/python-workflow.yml/badge.svg)
+[![codecov](https://codecov.io/gh/jaybjackie/ku-polls/branch/main/graph/badge.svg?token=DUYVPI5GL4)](https://codecov.io/gh/jaybjackie/ku-polls)
 Allow KU communities to create and participate in any polls and surveys on **KU Polls**. <br>
 
 The app was built using [Django](https://www.djangoproject.com/). <br>
